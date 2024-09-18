@@ -8,6 +8,14 @@ namespace BarajaEspañola
     {
         private List<Carta> cartas;
 
+        /// <summary>
+        /// Getter y setter de la lista de cartas de la baraja
+        /// </summary>
+        public List<Carta> Cartas { get { return cartas; } }
+
+        /// <summary>
+        /// Constructor de la clase baraja que añade uno a uno todas las cartas de una baraja española
+        /// </summary>
         public Baraja()
         {
             cartas = new List<Carta>();
@@ -15,12 +23,15 @@ namespace BarajaEspañola
             {
                 for (int j = 0; j < 12; j++)
                 {
-                    Carta carta = new Carta(j + 1, (Carta.Palo)i);
+                    Carta carta = new Carta(j + 1, (Carta.ePalo)i);
                     cartas.Add(carta);
                 }
             }
         }
 
+        /// <summary>
+        /// Metodo que nos perite barajar de forma random
+        /// </summary>
         public void Barajar()
         {
             Random r = new Random();
@@ -38,6 +49,10 @@ namespace BarajaEspañola
             cartas = newOrder;
         }
 
+        /// <summary>
+        /// Metodo que nos permite elegir como robar
+        /// </summary>
+        /// <returns>Nos devuelve la lista de cartas robadas</returns>
         public List<Carta> Robar()
         {
             List<Carta> robarCartas = new List<Carta>();
@@ -87,6 +102,11 @@ Elije la opcion de robo que te guste mas:
             }
         }
 
+        /// <summary>
+        /// Metodo que roba un numero de cartas
+        /// </summary>
+        /// <param name="numero">Variable que representa el umero de cartas que quieres robar</param>
+        /// <returns></returns>
         public List<Carta> Robar(int numero)
         {
             List<Carta> robarCartas = new List<Carta>();
@@ -98,7 +118,5 @@ Elije la opcion de robo que te guste mas:
 
             return robarCartas;
         }
-
-        public List<Carta> Cartas { get { return cartas; } }
     }
 }

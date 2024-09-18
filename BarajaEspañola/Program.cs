@@ -10,6 +10,11 @@ namespace BarajaEspañola
     {
         static List<Jugador> jugadores = new List<Jugador>();
         static Baraja baraja = new Baraja();
+
+        /// <summary>
+        /// Metodo que se ejecuta con el inicio del programa
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             while (true)
@@ -32,6 +37,10 @@ namespace BarajaEspañola
             }
         }
 
+        /// <summary>
+        /// Metodo que gestiona la logica del menu
+        /// </summary>
+        /// <returns>Devuelve un int que es la opcion de usuario</returns>
         static int Menu()
         {
             int option;
@@ -56,6 +65,10 @@ namespace BarajaEspañola
             return option;
         }
 
+        /// <summary>
+        /// Metodo principal del juego BatallaDeCartas
+        /// </summary>
+        /// <returns>Devuelve un bool que nos permite salir del bucle cuando se ha completado</returns>
         static bool BatallaDeCartas()
         {
             baraja.Barajar();
@@ -80,6 +93,11 @@ namespace BarajaEspañola
             return false;
         }
 
+        /// <summary>
+        /// Metodo que gestiona la logica de Batalla de cartas
+        /// </summary>
+        /// <param name="jugadores">Lista de jugadores para empezar este juego</param>
+        /// <returns>devuelve la lista de los jugadores que han ganado</returns>
         static List<Jugador> Jugar(List<Jugador> jugadores)
         {
             foreach (var jugador in jugadores.ToList())
@@ -111,9 +129,7 @@ namespace BarajaEspañola
                     cartaAlta = jugador.UltimaCarta.Numero;
                 }
                 else if (jugador.UltimaCarta.Numero == cartaAlta)
-                {
                     ganadores.Add(jugador);
-                }
             }
 
             if (ganadores.Count == 1)
@@ -124,20 +140,17 @@ namespace BarajaEspañola
                 foreach (var jugador in jugadores)
                 {
                     if (ganador.Id != jugador.Id)
-                    {
                         ganador.Mano.Add(jugador.UltimaCarta);
-                    }
                 }
 
                 foreach (var jugador in jugadores)
-                {
                     jugador.Mano.Remove(jugador.UltimaCarta);
-                }
 
                 Console.WriteLine($"El Jugador {ganador.Id} ha ganado la ronda");
 
                 jugadores.RemoveAll(j => j.Mano.Count == 0);
             }
+            // Si hay empate se ejecuta esta parte del codigo para desempatar con una partida extra
             else
             {
                 List<Carta> cartasRondaAnterior = new List<Carta>();
