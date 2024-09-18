@@ -8,15 +8,6 @@ namespace BarajaEspañola
         private int numero;
         private Palo tipo;
 
-        public enum Palo
-        {
-            Oros,
-            Copas,
-            Espadas,
-            Bastos,
-            Comodin
-        }
-
         public Carta()
         {
         }
@@ -27,27 +18,25 @@ namespace BarajaEspañola
             this.tipo = tipo;
         }
 
-        public int Numero {
-            get
-            {
-                return numero;
-            }
-            set
-            {
-                numero = value;
-            }
+        public enum Palo
+        {
+            Oros,
+            Copas,
+            Espadas,
+            Bastos,
+            Comodin
+        }
+
+        public int Numero
+        {
+            get { return numero; }
+            set { numero = value; }
         }
 
         public Palo Tipo
         {
-            get
-            {
-                return tipo;
-            }
-            set
-            {
-                tipo = value;
-            }
+            get { return tipo; }
+            set { tipo = value; }
         }
     }
 }

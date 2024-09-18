@@ -8,14 +8,14 @@ namespace BarajaEspañola
     {
         private List<Carta> cartas;
 
-        public void PrepararBaraja()
+        public Baraja()
         {
             cartas = new List<Carta>();
             for (int i = 0; i < 4; i++)
             {
                 for (int j = 0; j < 12; j++)
                 {
-                    Carta carta = new Carta(j+1,(Carta.Palo)i);
+                    Carta carta = new Carta(j + 1, (Carta.Palo)i);
                     cartas.Add(carta);
                 }
             }
@@ -30,7 +30,7 @@ namespace BarajaEspañola
             for (int i = 0; i < distancia; i++)
             {
                 int numero = r.Next(0, cartas.Count);
-                
+
                 newOrder.Add(cartas[numero]);
                 cartas.RemoveAt(numero);
             }
@@ -56,30 +56,19 @@ Elije la opcion de robo que te guste mas:
                         case 1:
                             robarCartas.Add(cartas[0]);
                             cartas.RemoveAt(0);
+
                             return robarCartas;
                         case 2:
                             Random r = new Random();
 
-                            for (int i = r.Next(1, cartas.Count); i >= 0; i--)
-                            {
-                                robarCartas.Add(cartas[0]);
-                                cartas.RemoveAt(0);
-                            }
-
-                            return robarCartas;
+                            return Robar(r.Next(0,cartas.Count));
                         case 3:
                             Console.WriteLine($"Escribe el numero de cartas que quieres robar (max: {cartas.Count})");
                             if (int.TryParse(Console.ReadLine(), out int robar))
                             {
                                 if (robar < cartas.Count)
                                 {
-                                    for (int i = 0; i < robar; i++)
-                                    {
-                                        robarCartas.Add(cartas[0]);
-                                        cartas.RemoveAt(0);
-                                    }
-
-                                    return robarCartas;
+                                    return Robar(robar);
                                 }
                                 else
                                     Console.WriteLine("Escribe una opcion que no salga del limite de la baraja actual");
@@ -97,5 +86,19 @@ Elije la opcion de robo que te guste mas:
                     Console.WriteLine("Introduzca un numero");
             }
         }
+
+        public List<Carta> Robar(int numero)
+        {
+            List<Carta> robarCartas = new List<Carta>();
+            for (int i = 0; i < numero; i++)
+            {
+                robarCartas.Add(cartas[0]);
+                cartas.RemoveAt(0);
+            }
+
+            return robarCartas;
+        }
+
+        public List<Carta> Cartas { get { return cartas; } }
     }
 }
