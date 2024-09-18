@@ -13,6 +13,7 @@ namespace BarajaEspañola
         {
             baraja.PrepararBaraja();
             baraja.Barajar();
+            Console.ReadKey();
         }
     }
 }

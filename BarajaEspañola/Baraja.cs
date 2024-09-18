@@ -25,12 +25,14 @@ namespace BarajaEspañola
         {
             Random r = new Random();
             List<Carta> newOrder = new List<Carta>();
+            int distancia = cartas.Count;
 
-            for (int i = 0; i < cartas.Count; i++)
+            for (int i = 0; i < distancia; i++)
             {
                 int numero = r.Next(0, cartas.Count);
-
+                
                 newOrder.Add(cartas[numero]);
+                cartas.RemoveAt(numero);
             }
 
             cartas = newOrder;
@@ -91,6 +93,8 @@ Elije la opcion de robo que te guste mas:
                             break;
                     }
                 }
+                else
+                    Console.WriteLine("Introduzca un numero");
             }
         }
     }
