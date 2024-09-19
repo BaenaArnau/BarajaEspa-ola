@@ -53,11 +53,22 @@ namespace BarajaEspañola
                 }
             }
 
-            Console.WriteLine("-------------------------------------------------");
-            foreach (var jugador in jugadores)
-                Console.WriteLine($"Jugador {jugador.Id} tiene un total de {jugador.Mano.Count} cartas en la mano");
-            Console.WriteLine("-------------------------------------------------");
+            ImprimirJugador(jugadores);
 
+            List<Jugador> ganadores = ComprobarCartaAlta(jugadores);
+
+            ComprobarEmpate(jugadores, ganadores);
+
+            return jugadores;
+        }
+
+        /// <summary>
+        /// Metodo que nos permite encontrar el jugador o jugadores con la carta mas alta
+        /// </summary>
+        /// <param name="jugadores">Lista de los jugadores que estan jugando la partida</param>
+        /// <returns>Devuelve una lista de ganadores de la ronda</returns>
+        private static List<Jugador> ComprobarCartaAlta(List<Jugador> jugadores)
+        {
             List<Jugador> ganadores = new List<Jugador>();
             int cartaAlta = 0;
 
@@ -76,6 +87,16 @@ namespace BarajaEspañola
                     ganadores.Add(jugador);
             }
 
+            return ganadores;
+        }
+
+        /// <summary>
+        /// Metodo que comprueba si hay un empate y hace las gestiones pertinentes para que desempaten
+        /// </summary>
+        /// <param name="jugadores">Lista de los jugadores activos en la partida</param>
+        /// <param name="ganadores">Lista de los gaadores de la ronda</param>
+        private void ComprobarEmpate(List<Jugador> jugadores, List<Jugador> ganadores)
+        {
             if (ganadores.Count == 1)
             {
                 Jugador ganador = ganadores[0];
@@ -116,8 +137,18 @@ namespace BarajaEspañola
                         jugador.Mano = ganadorEmpate.Mano;
                 }
             }
+        }
 
-            return jugadores;
+        /// <summary>
+        /// Metodo que nos permite imprimir las cartas que les quedan a los jugadores
+        /// </summary>
+        /// <param name="jugadores">Lista de jugadores en activo</param>
+        public static void ImprimirJugador(List<Jugador> jugadores)
+        {
+            Console.WriteLine("-------------------------------------------------");
+            foreach (var jugador in jugadores)
+                Console.WriteLine($"Jugador {jugador.Id} tiene un total de {jugador.Mano.Count} cartas en la mano");
+            Console.WriteLine("-------------------------------------------------");
         }
     }
 }

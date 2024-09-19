@@ -53,52 +53,23 @@ namespace BarajaEspañola
         /// Metodo que nos permite elegir como robar
         /// </summary>
         /// <returns>Nos devuelve la lista de cartas robadas</returns>
-        public List<Carta> Robar()
+        public List<Carta> Robar(bool opcion)
         {
             List<Carta> robarCartas = new List<Carta>();
             while (true)
             {
-                Console.WriteLine(@"
-Elije la opcion de robo que te guste mas:
-1. Robar una carta
-2. Robar un numero de cartas alazar
-3. Robar el numero de cartas que indiques");
-
-                if (int.TryParse(Console.ReadLine(), out int opcion))
+                switch (opcion)
                 {
-                    switch (opcion)
-                    {
-                        case 1:
-                            robarCartas.Add(cartas[0]);
-                            cartas.RemoveAt(0);
+                    case false:
+                        robarCartas.Add(cartas[0]);
+                        cartas.RemoveAt(0);
 
-                            return robarCartas;
-                        case 2:
-                            Random r = new Random();
+                        return robarCartas;
+                    case true:
+                        Random r = new Random();
 
-                            return Robar(r.Next(0,cartas.Count));
-                        case 3:
-                            Console.WriteLine($"Escribe el numero de cartas que quieres robar (max: {cartas.Count})");
-                            if (int.TryParse(Console.ReadLine(), out int robar))
-                            {
-                                if (robar < cartas.Count)
-                                {
-                                    return Robar(robar);
-                                }
-                                else
-                                    Console.WriteLine("Escribe una opcion que no salga del limite de la baraja actual");
-                            }
-                            else
-                                Console.WriteLine("Escribe un numero valido");
-
-                            break;
-                        default:
-                            Console.WriteLine("Escribe una opcion valida");
-                            break;
-                    }
+                        return Robar(r.Next(0,cartas.Count));
                 }
-                else
-                    Console.WriteLine("Introduzca un numero");
             }
         }
 
